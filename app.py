@@ -16,12 +16,12 @@ def upload():
     if "image" not in request.files:
         return "No image", 400
 
-    image = request.files["image"]
+    img = request.files["image"]
     filename = datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
-    image.save(os.path.join(UPLOAD_FOLDER, filename))
+    img.save(os.path.join(UPLOAD_FOLDER, filename))
 
     print("Image received")
     return "OK", 200
 
-
-app.run(host="0.0.0.0", port=10000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)
