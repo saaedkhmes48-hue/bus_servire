@@ -13,13 +13,11 @@ def home():
 
 @app.route("/upload", methods=["POST"])
 def upload():
-    if "image" not in request.files:
+    if not request.data:
         return "No image", 400
-
-    img = request.files["image"]
     filename = datetime.now().strftime("%Y%m%d_%H%M%S") + ".jpg"
-    img.save(os.path.join(UPLOAD_FOLDER, filename))
-
+    with open(os.path.join(UPLOAD_FOLDER, filename), "wb") as f:
+        f.write(request.data)
     print("Image received")
     return "OK", 200
 
